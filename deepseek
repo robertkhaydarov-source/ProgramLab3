@@ -1,0 +1,21 @@
+public void watchPicture(Picture picture) {
+    // Проверка, спит ли персонаж
+    if (isSleeping()) {
+        throw new IllegalStateException("Персонаж спит и не может смотреть картины");
+    }
+    
+    // Проверка смешных картин
+    if (picture.isFunny()) {
+        amusementLevel++;
+        
+        // Если количество смешных картин превышает порог
+        if (amusementLevel > AMUSEMENT_THRESHOLD_FOR_GLASSES) {
+            setCurrentMood(Mood.LAUGH);
+        }
+        
+        // Проверка условий для надевания очков
+        if (amusementLevel > AMUSEMENT_THRESHOLD_FOR_GLASSES && !glassesOn()) {
+            tryPutOnGlassesRandomly();
+        }
+    }
+}
